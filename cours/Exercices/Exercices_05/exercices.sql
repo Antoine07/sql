@@ -182,8 +182,46 @@ SELECT name, birth_day
 FROM pilots
 WHERE birth_day < '2001' AND birth_day > '1998';
 
-SELECT `name`, `birth_day`
-FROM `pilots`
-WHERE `birth_day` > '1978';
+-- SELECT `name`, `birth_day`
+-- FROM `pilots`
+-- WHERE `birth_day` > '1978';
 
 -- quels sont les pilotes qui ont un vol programmé après 2020-05-08
+
+
+SELECT name, next_flight
+FROM pilots
+WHERE next_flight > '2020-05-08 23:59:59';
+
+-- de manière équivalente
+
+SELECT name, next_flight
+FROM pilots
+WHERE next_flight > '2020-05-09 00:00:00' OR  next_flight= '2020-05-09 00:00:00';
+
+
+-- ajout d'information
+
+UPDATE compagnies
+SET street = 'Shenton Park',
+ city = 'Perth', 
+ numStreet=20
+WHERE comp = 'AUS';
+
+UPDATE compagnies
+SET street = 'Rue de la Lieure',
+ city = 'Voiron',
+  numStreet=11
+WHERE comp = 'FRE1';
+
+UPDATE compagnies
+SET street = 'Qinghai',
+ city = 'Xian de Tongde',
+  numStreet=17
+WHERE comp = 'CHI';
+
+UPDATE compagnies
+SET street = 'Marymount',
+ city = 'Singapour',
+  numStreet=1
+WHERE comp = 'SIN';
