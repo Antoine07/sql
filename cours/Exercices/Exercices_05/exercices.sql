@@ -136,8 +136,54 @@ WHere certificate NOT IN ('ct-1', 'ct-11', 'ct-12', 'ct-56'); -- pensez au compl
 
 UPDATE `pilots`
     SET `bonus` =
-        (CASE
-            WHEN `certificate` IN ('ct-1', 'ct-11', 'ct-12') THEN 1000
-            WHEN `certificate` IN ('ct-56') THEN 2000
-            ELSE 500
-        END);
+    (CASE
+        WHEN `certificate` IN ('ct-1', 'ct-11', 'ct-12') THEN 1000
+        WHEN `certificate` IN ('ct-56') THEN 2000
+        ELSE 500
+    END);
+
+
+-- Meilleur bonus
+
+SELECT name
+FROM pilots
+WHERE bonus = (SELECT MAX(bonus) FROM pilots);
+
+-- Heure de vols distincts
+
+SELECT COUNT( DISTINCT numFlying )
+FROM pilots;
+
+SELECT  DISTINCT numFlying 
+FROM pilots;
+
+-- combien de pilots sont en dessous de la moyenne d'heure de vols
+
+SELECT COUNT(*)
+FROM pilots
+WHERE numFlying < ( SELECT AVG(numFlying) FROM pilots );
+
+-- le nom des pilots après 1978
+
+SELECT name, birth_day
+FROM pilots
+WHERE birth_day > '1979';
+
+--  le nom des pilots avant 1978
+
+
+SELECT name, birth_day
+FROM pilots
+WHERE birth_day < '1978';
+
+-- entre 1978 et 1998
+
+SELECT name, birth_day
+FROM pilots
+WHERE birth_day < '2001' AND birth_day > '1998';
+
+SELECT `name`, `birth_day`
+FROM `pilots`
+WHERE `birth_day` > '1978';
+
+-- quels sont les pilotes qui ont un vol programmé après 2020-05-08
