@@ -225,3 +225,14 @@ SET street = 'Marymount',
  city = 'Singapour',
   numStreet=1
 WHERE comp = 'SIN';
+
+
+-- 
+
+SELECT numStreet, street, city
+FROM compagnies
+WHERE comp IN (
+    SELECT compagny
+    FROM pilots
+    WHERE numFlying < 90
+);
